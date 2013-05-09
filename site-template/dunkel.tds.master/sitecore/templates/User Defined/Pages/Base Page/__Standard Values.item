@@ -1,0 +1,82 @@
+----item----
+version: 1
+id: {44AD8BC5-3710-4ADF-8A50-91A86089EA8F}
+database: master
+path: /sitecore/templates/User Defined/Pages/Base Page/__Standard Values
+parent: {215A4570-9902-4826-BC56-7699FB8F6007}
+name: __Standard Values
+master: {00000000-0000-0000-0000-000000000000}
+template: {215A4570-9902-4826-BC56-7699FB8F6007}
+templatekey: Base Page
+
+----field----
+field: {F1A1FE9E-A60C-4DDB-A3A0-BB5B29FE732E}
+name: __Renderings
+key: __renderings
+content-length: 245
+
+<?xml version="1.0" encoding="utf-16"?>
+<r xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <d id="{FE5D7FDF-89C0-4D99-9AA3-B5FBD009C9F3}" l="{7606D387-5CFD-4EF2-B453-95D9B9341BE9}" />
+</r>
+----field----
+field: {A4F985D9-98B3-4B52-AAAF-4344F6E747C6}
+name: __Workflow
+key: __workflow
+content-length: 38
+
+{BAFF7566-704F-4E40-AAE8-6D37EB61CF93}
+----field----
+field: {CA9B9F52-4FB0-4F87-A79F-24DEA62CDA65}
+name: __Default workflow
+key: __default workflow
+content-length: 38
+
+{BAFF7566-704F-4E40-AAE8-6D37EB61CF93}
+----version----
+language: en
+version: 1
+revision: 25e8fe08-df99-4aa4-8776-cb367136a303
+
+----field----
+field: {52807595-0F8F-4B20-8D2A-CB71D28C6103}
+name: __Owner
+key: __owner
+content-length: 14
+
+sitecore\admin
+----field----
+field: {25BED78C-4957-4165-998A-CA1B52F67497}
+name: __Created
+key: __created
+content-length: 15
+
+20120501T101500
+----field----
+field: {5DD74568-4D4B-44C1-B513-0AF5F4CDA34F}
+name: __Created by
+key: __created by
+content-length: 14
+
+sitecore\admin
+----field----
+field: {8CDC337E-A112-42FB-BBB4-4143751E123F}
+name: __Revision
+key: __revision
+content-length: 36
+
+25e8fe08-df99-4aa4-8776-cb367136a303
+----field----
+field: {D9CF14B1-FA16-4BA6-9288-E8A174D4D522}
+name: __Updated
+key: __updated
+content-length: 34
+
+20121009T132457:634853858979850540
+----field----
+field: {BADD9CF9-53E0-4D0C-BCC0-2D784C282F6A}
+name: __Updated by
+key: __updated by
+content-length: 14
+
+sitecore\admin

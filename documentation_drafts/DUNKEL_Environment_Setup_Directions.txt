@@ -1,0 +1,144 @@
+Sitecore Installation Steps:
+
+- If you have not done so already, check out the code from the repo onto your development environment.  
+
+- If you have not done so already, install Hedgehog TDS.
+
+- Install Sitecore 6.5.0 rev. 120706 (Sitecore 6.5 Update 5) to your development environment.  As you walk through the installer wizard, make these selections:
+	- On "Add or Remove a Sitecore Instance," choose "New Instance."
+	- Accept the terms of the agreement.
+	- On "Installation Type," choose a "Complete" installation.  This will create the databases and install the client instance.
+	- On "Instance Name," type in the name "DUNKEL".  If you already have an instance with this name, either choose a new name, or go back to the "Add or Remove a Sitecore Instance" step and uninstall the existing one.
+	- On "License File", choose the license file you received from Sitecore.  This file will be copied to the \Data directory of your new Sitecore instance.
+	- On "Database Server," choose the database server where you wish to install the databases, and provide the login ID and password.  Setting this up now will allow Sitecore to set up the three main databases (core, master, and website) and create the connectionstrings.config file.  
+    - On "Destination Folder", choose a location at the root of the solution - for example,  C:\Development\DUNKEL\sitecore.
+	- On "IIS Web Site," enter the web site name DUNKEL.
+	- Complete the installation.
+	
+- Open IIS.  (These instructions apply to IIS 7.)  You will see a new site and a new app pool with the name of your new Sitecore instance.  
+	- Select "Application Pools."  
+	- From the list of Application pools, right-click "DUNKELAppPool" and select Basic Settings.
+	- In the Edit Application Pool dialog, set the .NET Framework version to v4.0.  (This is usually defaulted to 2.0.)
+	- In the Edit Application Pool dialog, set the Managed pipeline mode to Integrated.  (This may already be set correctly.)
+	- While in IIS, add this MIME type (if you don't have it already):
+		- Extension: .woff
+		- MIME type: application/x-woff
+			
+- Open your hosts file and add entries for all of the country sites supported by this application.  The hostnames you enter will need to match the hostnames in the SiteDefinition.config file.  
+	
+- Open the DUNKEL solution and configure TDS.
+	- Open the Properties for the DUNKEL.tds.master project.  (Note: if the project could not be opened or does not display the flag-like TDS icon, you may not have a correct installation of TDS. Reinstall it and try again.)
+	- In the General tab, make sure:
+		- the source web project is DUNKEL.web
+		- the source web physical path is ..\DUNKEL.web
+		- the source web virtual path is /DUNKEL.web.csproj
+		- the Sitecore Database is master
+	- In the Build path:
+		- make sure the Build Output Path is .\Debug\
+		- Check the "Edit user specific configuration" box
+		- For Sitecore Web URL, enter the URL you will be using, as set in IIS.  By default this should be http://DUNKEL
+		- For Sitecore Deploy Folder, enter the relative path to your Sitecore client instance (the \Website folder).  Following our recommended site structure, this will probably be ../Website.
+		- Check off the "Install Sitecore Connector" option.
+		
+- Configure the advanced search crawler.  The instructions are located in the file: \vendor\Sitecore\AdvancedDatabaseCrawler-v2\how-to-build.txt.		
+		
+- Build the solution.
+			
+- Configure Sitecore Rocks.
+	- If you have not already done so, install Sitecore Rocks: http://visualstudiogallery.msdn.microsoft.com/44a26c88-83a7-46f6-903c-5c59bcd3d35b/
+	- In Visual Studio, on the top menu, choose Sitecore > New Connection.  In the Connection dialog, choose:
+		- for Data Provider, choose "Hard Rock Web Service"
+		- for host name, enter the sitecore web URL, without the protocol.  By default, you will enter "DUNKEL"
+		- for username, enter "sitecore\admin", unless you have created a new admin-level account
+		- for password, enter "b", unless you have changed the password
+		- skip the location field
+		- check "Automatically Upgrade Server Components When the Dialog Closes"
+	- Test the new connection to ensure it works.
+	- In the Solution Explorer, right-click the DUNKEL.web project and choose Sitecore.  In the context menu, choose the DUNKEL connection for this project.
+	
+- Sync the DUNKEL.tds.master project to your new Sitecore database
+	- In the Solution Explorer, right-click DUNKEL.tds.master and choose "Sync with Sitecore."
+	- If prompted to install a new version of the connector, choose "yes."
+	- In the Sync Project with Sitecore dialog, select all of the items in the tree.  (The quickest way to do this is to collapse the tree and select the root nodes.) 
+	- Click the "Make selected Sitecore items match project" button.  (This is the button showing a PC, a green arrow pointing right, and the Sitecore logo).
+	- Click the "Do Updates" button.
+	- Hit "Refresh" to make sure that all of the items have synced.  This is complete when none of the items display a red or blue error message (e.g. "Sitecore item Newer" or "Missing in Sitecore").  It may take multiple tries to sync all of the items.
+	
+- Using either the Sitecore interface or Sitecore Rocks, publish the content in the database.  In the Publish dialog, be sure to publish the content in all of the available languages.
+
+- Open the site and make sure it's working.  By default, this means opening http://DUNKEL in your browser.  You should see the operational site.	
+
+Multi-Site Configuration
+------------------------
+
+- This application supports several country sites.  The hostnames for these sites are defined in the SiteDefinition.config file, which you can find in your Sitecore install at \Website\App_Config\Include\SiteDefinition.config.  
+
+To set these up for local development:
+	- Open IIS.  Expand "Sites" and right-click on the "DUNKEL" site.  Click "Edit Bindings."
+	- Add bindings for the following host names. Use the default type (http), IP address (“All Unassigned”) and port (80).
+		 	DUNKEL
+		 	DUNKEL.ca
+		 	DUNKEL.de
+		 	etc.
+			
+	- Close IIS.
+	- Open your hosts file and add the hostnames, pointing them to localhost.  Typically your entries will look like this:
+	
+			127.0.0.1 	DUNKEL
+			127.0.0.1 	DUNKEL.ca
+			127.0.0.1 	DUNKEL.de
+			etc.
+
+
+Brightcove Installation (if necessary)
+--------------------------------------
+
+- Install Sitecore DMS 2.0.1 rev. 120706.
+	- Download the DMS .zip at https://sdn.sitecore.net/Products/Sitecore%20V5/Sitecore%20CMS%206/Update/6_5_0_rev_120706/Download_CMS_and_DMS.aspx
+	- Follow the instructions at http://sdn.sitecore.net/Products/Sitecore%20V5/Sitecore%20CMS%206/Installation/Installation/SQL.aspx with the following modification:
+		- You do not need to follow step 8 ("Modify existing layouts and put in a <sc:VisitorIdentification runat="server"/> Web control ... ").
+		
+- Install the Brightcove connector for Sitecore.
+	- Download the Brightcove Video Cloud Connect 1.1 (for CMS 6.5) package from http://sdn.sitecore.net/Products/Brightcove/Brightcove11.aspx
+	- Follow the instructions at http://sdn.sitecore.net/upload/sdn5/modules/brightcove/11/bvcc_installation_guide_11-a4.pdf with the following modification:
+		- In section 
+		- Skip section 3.3: Rich Text Editor Setup.  The Rich Text Editor is already set to use the Rich Text Full profile.
+		- Skip section 3.4: Account Definition.  The file DUNKEL.config/Debug/app_config/include/Sitecore.SharedSource.BrightcoveIntegration.config file has already been updated with the account information.
+	- To sync with the client video library, follow the steps in Chapter 2 of http://sdn.sitecore.net/upload/sdn5/modules/brightcove/11/bvcc_cookbook_11-a4.pdf, with the following notes: 
+		- The videos in the media library must live under the path /sitecore/media library/Modules/Brightcove Media.  Several of the Sitecore templates will expect to find videos under that path.
+	
+	
+Clay Tablet Installation (if necessary)
+---------------------------------------
+	
+- Download version 3.5 of the Clay Tablet Sitecore Connector: 
+http://www.clay-tablet.com/files/FM Global/FMGLOBAL POC Sotfware Delivery Package_10252012.rar
+ 
+- The zipped file contains 4 folders. 
+a.	Key Accounts – 
+	• DEV Server - Source and target xml files
+	• PROD Server - Source and target xml files
+b.	Database – CT3 database
+c.	Documents
+	• Sitecore Install Guide
+	• Sitecore User Guide 
+	• CT3 Language Codes txt file
+d.  Sitecore Package
+ 
+- Attach the CT3 database to the server where Sitecore is located
+	- Unzip CT3TranslationDB.zip into the SQL Server data directory - for example, C:\Program Files\Microsoft SQL Server\MSSQL10.MSSQLSERVER_2008\MSSQL\DATA .
+	- SQL Server Management Studio, attach to the DB you just unzipped.
+
+- Add a connection string to App_Config/ConnectionStrings.config”.  Set the userid, password and datasource appropriately for your SQL Server.
+
+	<add name="CT3Translation" connectionString="user id=xxx;password=xxx;DataSource=xxx;Database=CT3Translation "/>
+
+- Prepare the required Folders. Create a folder called “CT3” under the Sitecore data folder, and then create two sub-folders called “Accounts” and “data” in that newly created“CT3” folder. Then, place the two Account License Keys from CTT (check Step 1) into the “CT3/Accounts”.
+
+Note: The "CT3" folder MUST be created under the Sitecore \Data folder, not the Sitecore \Website root folder. To find the Sitecore Data folder, you can check the Web.config file, searching for a line such as:
+
+	<sc.variable name="dataFolder" value="C:\Inetpub\wwwroot\Sitecore6\Data\"/>
+
+- Install Clay Tablet package into Sitecore, using Development Tools > Installation Wizard.
+	- Install CT3_64045 Translation for Sitecore 6.4_Client-3.64.0.4.5.zip package and select Overwrite All when prompted.
+	- Install CT3_64045_Sitecore6.4_Workbox_update-3.64.0.4.5.zip, and select Overwrite when prompted about the DLL.

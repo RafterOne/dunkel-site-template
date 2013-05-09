@@ -1,0 +1,34 @@
+Configuration Files: Maintaining and Deploying Files for Multiple Configurations
+--------------------------------------------------------------------------------
+
+Inside the DUNKEL solution, you will find a project named DUNKEL.config.  This project collects the configuration files that have been updated during development and that need to be deployed to your Sitecore installs.  For example, the SitecoreSettings.config file will have several new setting that support this project.
+
+The DUNKEL.config project contains directories for each configuration that is defined in the solution.  These will include:
+
+\Debug - Typically, this is the configuration that is used by developers in their own local development environments
+\Release - This may be the production environment
+
+Other configurations may include Staging, Continuous Integration, and Authoring.
+
+As part of the build process, the TDS Master project can be configured to automatically copy the configuration files into the Sitecore \Website directory.  This is done via the File Replacement tasks defined in the project properties.  For example, to see how this is configured for the Debug configuration:
+
+- Open the DUNKEL solution in Visual Studio.
+- Right-click on the DUNKEL.tds.master project and choose Properties.
+- Click on the File Replacement tab.
+- On this tab, you can view the settings for each available configuration.  The Debug Configuration should include a step that copies the contents of ..\DUNKEL.config\Debug into the folder at the path .\.  The destination path is relative to the Sitecore Deploy Folder defined on the Build tab of DUNKEL.tds.master - which means that the File Replacement task is copying the contents of \Debug into your \Website project.
+
+To add a new configuration, follow these steps:
+
+- Define the new configuration in your solution, by opening Visual Studio and selecting Build > Configuration Manager.
+- Add a directory to the DUNKEL.config project, and for the sake of clarity, give it the same name as the configuration.
+- As a starting point, copy the directory structure and files from another configuration directory into the new directory.  You will notice that the directory structure will mirror the directory structure in the Sitecore deployment directory - for example, the App_Config\Include path mirrors the Sitecore's App_Config\Include path.
+- Modify the configuration files as needed to support the configuration.
+- Right-click on the DUNKEL.tds.master project and choose Properties.
+- Click on the File Replacement tab.
+- Choose the configuration are you setting up, and add a task to copy the files from your new configuration.  For example, if the new configuration is named Staging, you will:
+	- Set Type to Folder
+	- Set Source Location to ..\DUNKEL.config\Staging
+	- Set Target Location to .\
+- Try to build the solution, and check that the new configuration files ended up in the correct locations in your Sitecore deployment folder.
+
+Depending on the project needs, we may also set up a separate folder named Reference that contains config files which may be updated during development, but which should not be copied automatically because they contain machine-specific settings (for example, settings that are unique on each developer's machine).  The web.config is an example of a file that may need to be updated and disseminated this way.  Changes that are made to files in the \Reference folder would need to be monitored and applied manually to each Sitecore install.

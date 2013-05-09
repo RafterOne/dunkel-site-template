@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E8DD3DB6-FEF9-4C79-A06D-51EB9CC33AB1}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>dunkel</RootNamespace>
+    <AssemblyName>dunkel</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PixelMEDIA.Controls">
+      <HintPath>..\..\lib\PixelMEDIA.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="PixelMEDIA.SitecoreCMS.Controls">
+      <HintPath>..\..\lib\PixelMEDIA.SitecoreCMS.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Kernel">
+      <HintPath>..\..\lib\Sitecore.Kernel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sitecore.SharedSource">
+      <HintPath>..\..\lib\Sitecore.SharedSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="layouts\body\SimplePageSublayout.ascx.cs">
+      <DependentUpon>SimplePageSublayout.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="layouts\body\SimplePageSublayout.ascx.designer.cs">
+      <DependentUpon>SimplePageSublayout.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="layouts\navigation\LeftNavFixedRootParentChildrenSublayout.ascx.cs">
+      <DependentUpon>LeftNavFixedRootParentChildrenSublayout.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="layouts\navigation\LeftNavFixedRootParentChildrenSublayout.ascx.designer.cs">
+      <DependentUpon>LeftNavFixedRootParentChildrenSublayout.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="layouts\navigation\LeftNavParentChildrenSublayout.ascx.cs">
+      <DependentUpon>LeftNavParentChildrenSublayout.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="layouts\navigation\LeftNavParentChildrenSublayout.ascx.designer.cs">
+      <DependentUpon>LeftNavParentChildrenSublayout.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="layouts\OneColumnSublayout.ascx.cs">
+      <DependentUpon>OneColumnSublayout.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="layouts\OneColumnSublayout.ascx.designer.cs">
+      <DependentUpon>OneColumnSublayout.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="layouts\shared\FocusAreasSublayout.ascx.cs">
+      <DependentUpon>FocusAreasSublayout.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="layouts\shared\FocusAreasSublayout.ascx.designer.cs">
+      <DependentUpon>FocusAreasSublayout.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="layouts\shell\FooterSublayout.ascx.cs">
+      <DependentUpon>FooterSublayout.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="layouts\shell\FooterSublayout.ascx.designer.cs">
+      <DependentUpon>FooterSublayout.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="layouts\shell\HeaderSublayout.ascx.cs">
+      <DependentUpon>HeaderSublayout.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="layouts\shell\HeaderSublayout.ascx.designer.cs">
+      <DependentUpon>HeaderSublayout.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="layouts\SiteLayout.aspx.cs">
+      <DependentUpon>SiteLayout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="layouts\SiteLayout.aspx.designer.cs">
+      <DependentUpon>SiteLayout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="layouts\TwoColumnSublayout.ascx.cs">
+      <DependentUpon>TwoColumnSublayout.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="layouts\TwoColumnSublayout.ascx.designer.cs">
+      <DependentUpon>TwoColumnSublayout.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="layouts\body\SimplePageSublayout.ascx" />
+    <Content Include="layouts\navigation\LeftNavFixedRootParentChildrenSublayout.ascx" />
+    <Content Include="layouts\navigation\LeftNavParentChildrenSublayout.ascx" />
+    <Content Include="layouts\OneColumnSublayout.ascx" />
+    <Content Include="layouts\shared\FocusAreasSublayout.ascx" />
+    <Content Include="layouts\shell\FooterSublayout.ascx" />
+    <Content Include="layouts\shell\HeaderSublayout.ascx" />
+    <Content Include="layouts\SiteLayout.aspx" />
+    <Content Include="layouts\system\VisitorIdentification.aspx" />
+    <Content Include="layouts\TwoColumnSublayout.ascx" />
+    <Content Include="layouts\xmlcontrol.aspx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56317</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

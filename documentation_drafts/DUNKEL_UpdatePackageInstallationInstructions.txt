@@ -1,0 +1,75 @@
+These instructions document how to create an update package, and how to install it to a clean Sitecore install.  For additional reference, see the TDS documentation (specifically chapter 8): http://www.hhogdev.com/Products/Team-Development-for-Sitecore/~/media/BA5BF835245346C4B765DFC010ADB0DC.ashx
+
+Create the Update Package
+=========================
+Creating the update package will be PixelMEDIA's responsibility, but these steps are included to help all parties understand the process.
+
+- Working in a development environment, pull down the latest build of the website.
+
+- In Visual Studio 2010, right-click on the DUNKEL.tds.master project and open Properties.
+
+- Click the "Update Package" tab.
+	- In the Configuration dropdown, choose the configuration for which you're building a package.
+	- Check off "Generate package during build".
+	- Fill out the comments with the author, publisher, version, and a readme. In the readme, give any notes on the build, including the revision number in the repo.
+	- Do not check off "Generate separate code and item packages."
+	- Check off "Append the current date and time to the package name."
+	- In the field for "Sitecore Assembly Path," point to the \bin directory of your local Sitecore instance.  This is the same instance that you point to on the Build tab, under Sitecore Deploy Folder.
+	- Build the solution.
+	- The update package will appear in your solution directory tree under \DUNKEL.tds.master.  For example, a package build for the Debug configuration would be copied to a folder named \DUNKEL.tds.master\Package_Debug, and it would have a name like DUNKEL.tds.master_20120917_0835.update.
+
+
+Install the Update Package on a clean Sitecore installation
+===========================================================
+
+An update package can be used on a clean Sitecore install.  If you do not have one, follow the next two steps:
+
+1. Using the installation guides provided by Sitecore, install Sitecore 6.5 update-5 (rev. 120706) and Sitecore DMS 2.0.1 rev. 120706 to your target server. 
+
+2. Open IIS.  (These instructions apply to IIS 7.)  You will see a new site and a new app pool with the name of your new Sitecore instance.  
+	- Select "Application Pools."  
+	- From the list of Application pools, right-click the app pool for this instance (e.g. "DUNKELAppPool") and select Basic Settings.
+	- In the Edit Application Pool dialog, set the .NET Framework version to v4.0.  (This is usually defaulted to 2.0.)
+	- In the Edit Application Pool dialog, set the Managed pipeline mode to Integrated.  (This may already be set correctly.)
+	
+Once you have a running Sitecore instance:
+
+3. In your browser, open the Sitecore instance and navigate to this path: /sitecore/admin/UpdateInstallationWizard.aspx
+	- If prompted, login with your admin credentials.  By default these are:
+			username: sitecore/admin
+			password: b
+	- On the first screen of the wizard, select "Choose a Package"
+	- On "Choose a package to install," select the latest .update, which will have a name such as DUNKEL.tds.master_20120911_1402.update.  Select "View package information."
+	- Select "Analyze and install the package."
+	- On the next screen, you may optionally click "Analyze."   The update package will encounter collisions, warnings, and possibly even errors, but it should not run into any critical errors.
+	- Click "Install."  The wizard will work through the update, which includes putting items into the Sitecore database and copying files into the \Website directory.
+	- The installation should proceed with no critical errors.  If you encounter a critical error, refresh the page and try the install again; it may complete successfully this time.  If it does not, stop the process and contact PixelMEDIA.
+	- When it is complete, click "Installation Result" and then close the wizard, or optionally review the installation messages. 
+
+4. Open the Sitecore CMS Dashboard and republish the site.
+
+5. You may also need to rebuild the search index.  
+	- In the Sitecore CMS Dashboard, open the Start menu and select Control Panel > Database.
+	- Click "Rebuild the Search Index."
+	- In the Wizard, select every search index (especially "advanced"), and start the rebuild.
+	- To test search, open the site, open the search pop-up from the header, and type in "Broker."  Hit submit, and you should come to a search results page with a list of results.
+	
+	
+Install the Update Package to an existing Sitecore installation
+===============================================================
+The update package has been configured not to overwrite or delete the Content in your Content tree.  It also does not overwrite the .config files.  It will overwrite templates, sublayouts, and any application files that are in the \Website directory where your Sitecore install lives.
+
+To install the update package
+
+- Follow steps 3 - 5 in the previous instructions. 
+
+- You will see that the existing .config files have not been overwritten.  The new ones from the update package will be added to the appropriate directory with a timestamp added to the filename.  Remember to check these regularly to make sure that any new changes in the .config files make it into your environment. 
+
+
+Additional Setup
+================
+- If your application supports more than one country site, the hostnames for these sites are defined in the SiteDefinition.config file, which you can find in your Sitecore install at \Website\App_Config\Include\SiteDefinition.config.  These hostnames must also be bound to the site in IIS, and defined in your hosts file.  For more information, consult http://sdn.sitecore.net/Articles/Administration/Configuring%20Multiple%20Sites.aspx 
+
+- The .woff MIME type is not supported by default in IIS.  Check for it in IIS, and if it is missing, add this value: 
+		- Extension: .woff
+		- MIME type: application/x-woff
