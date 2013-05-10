@@ -8,7 +8,7 @@ How to use this framework: General installation steps
 
 The dunkel framework is intended as a template for the development of new Sitecore instances.  You will replace every occurrence of the name "dunkel" with the name of your project.
 
-Create a directory structure that keeps your reference .dlls, your source, and your Sitecore install in parallel directories, like so:
+Clone the repo into a directory named after your project.  Add \sitecore in the same directory as \src and \lib.  You should end up wiht a directory structure like this:
 
 \dunkel
 	\lib
@@ -29,7 +29,7 @@ Create a directory structure that keeps your reference .dlls, your source, and y
 
 - Copy Sitecore.Client.dll and Sitecore.Kernel.dll from \sitecore\website\bin into \lib.
 
-- Open \src.  Copy in the contents of \site-template.  You will now have a tree like this:
+- You will now have a tree like this:
 
 \dunkel
 	\src
