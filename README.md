@@ -11,15 +11,18 @@ The dunkel framework is intended as a template for the development of new Siteco
 
 Create a directory structure that keeps your reference .dlls, your source, and your Sitecore install in parallel directories, like so:
 
+```
 \dunkel
 	\lib
 	\sitecore	
 	\src
 		\dunkel.web
 		\dunkel.tds.master
+```	
 	
 - Install the appropriate version of Sitecore into the directory \dunkel\sitecore.  When you are done, you will see two or three subdirectories (depending on whether the installer creates the databases for you):
 
+```
 \dunkel
 	\lib
 	\sitecore
@@ -27,6 +30,7 @@ Create a directory structure that keeps your reference .dlls, your source, and y
 		\data
 		\database 
 	\src		
+```
 
 - Copy Sitecore.Client.dll and Sitecore.Kernel.dll from \dunkel\sitecore\website\bin into \lib.
 
