@@ -6,7 +6,6 @@ A template for a new Sitecore site, including layouts, sublayouts, and a startin
 =====================================================
 How to use this framework: General installation steps
 
-[ TODO: Detail the prerequisites: Visual Studio with Sitecore Rocks and TDS Hedgehog installed, a copy of the desired Sitecore installer plus its license ] 
 
 The dunkel framework is intended as a template for the development of new Sitecore instances.  You will replace every occurrence of the name "dunkel" with the name of your project.
 
@@ -33,4 +32,17 @@ Create a directory structure that keeps your reference .dlls, your source, and y
 
 - Rename the projects and code under \src to replace "dunkel" with the name of your project.
 
-- Sync the contents of dunkel.tds.master to your Sitecore database.  [TODO: Detail the steps for doing the first sync between dunkel.tds.master and the target Sitecore database.  Until I get this done, here's a suggestion: it may be easier to install the sitecore connector first and then try to do the sync.]
+- We recommend adding Sitecore shared source modules to your project, starting with the Library found here: http://marketplace.sitecore.net/en/Modules/Library.aspx
+
+
+
+To take advantage of the items serialized in the dunkel.tds.master project:
+
+- Make sure TDS Hedgehog and Sitecore Rocks are installed in your instance of Visual Studio.
+
+- Create a connection to your Sitecore database: right-click on dunkel.web and select Sitecore/Connect, then follow the steps in the wizard.
+
+- Install the Sitecore connector: right-click on dunkel.tds.master and selecting "Install Sitecore connector." 
+
+- Sync the contents of dunkel.tds.master to your Sitecore database.
+
